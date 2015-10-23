@@ -8,7 +8,6 @@ use Monii\Specification\Operator\LogicalOr;
 use Monii\Specification\Operator\Page;
 use Monii\Specification\Operator\PerPage;
 use PHPUnit_Framework_TestCase;
-use function Monii\Specification\find_first_or_null;
 
 class FindFirstOrNullTest extends PHPUnit_Framework_TestCase
 {
@@ -26,26 +25,26 @@ class FindFirstOrNullTest extends PHPUnit_Framework_TestCase
 
         $specification = new PerPage(5, new Page(3, $orSpecification));
 
-        $this->assertNull(find_first_or_null($specification, LogicalAnd::class));
+        $this->assertNull(\Monii\Specification\find_first_or_null($specification, LogicalAnd::class));
 
         $this->assertEquals(
             $orSpecification,
-            find_first_or_null($specification, LogicalOr::class)
+            \Monii\Specification\find_first_or_null($specification, LogicalOr::class)
         );
 
         $this->assertEquals(
             $equalsOneSpecification,
-            find_first_or_null($specification, Equals::class)
+            \Monii\Specification\find_first_or_null($specification, Equals::class)
         );
 
         $this->assertEquals(
             new Page(3, $orSpecification),
-            find_first_or_null($specification, Page::class)
+            \Monii\Specification\find_first_or_null($specification, Page::class)
         );
 
         $this->assertEquals(
             new PerPage(5, new Page(3, $orSpecification)),
-            find_first_or_null($specification, PerPage::class)
+            \Monii\Specification\find_first_or_null($specification, PerPage::class)
         );
     }
 }
