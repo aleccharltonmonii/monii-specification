@@ -8,7 +8,6 @@ use Monii\Specification\Operator\LogicalOr;
 use Monii\Specification\Operator\Page;
 use Monii\Specification\Operator\PerPage;
 use PHPUnit_Framework_TestCase;
-use function Monii\Specification\find;
 
 class FindTest extends PHPUnit_Framework_TestCase
 {
@@ -28,27 +27,27 @@ class FindTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [],
-            find($specification, LogicalAnd::class)
+            \Monii\Specification\find($specification, LogicalAnd::class)
         );
 
         $this->assertEquals(
             [$orSpecification],
-            find($specification, LogicalOr::class)
+            \Monii\Specification\find($specification, LogicalOr::class)
         );
 
         $this->assertEquals(
             [$equalsOneSpecification, $equalsTwoSpecification, $equalsThreeSpecification],
-            find($specification, Equals::class)
+            \Monii\Specification\find($specification, Equals::class)
         );
 
         $this->assertEquals(
             [new Page(3, $orSpecification)],
-            find($specification, Page::class)
+            \Monii\Specification\find($specification, Page::class)
         );
 
         $this->assertEquals(
             [new PerPage(5, new Page(3, $orSpecification))],
-            find($specification, PerPage::class)
+            \Monii\Specification\find($specification, PerPage::class)
         );
     }
 }
