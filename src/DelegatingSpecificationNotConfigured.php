@@ -7,7 +7,7 @@ use RuntimeException;
 class DelegatingSpecificationNotConfigured extends RuntimeException
 {
     /**
-     * @param DelagatingSpecification $object
+     * @param DelegatingSpecification $object
      * @return DelegatingSpecificationNotConfigured
      */
     public static function forObject($object)

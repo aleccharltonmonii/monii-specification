@@ -2,11 +2,11 @@
 
 namespace Monii\Specification\Tests\Fixtures;
 
-use Monii\Specification\DelagatingSpecification;
+use Monii\Specification\DelegatingSpecification;
 use Monii\Specification\Operator\Equals;
 use Monii\Specification\Operator\LogicalAnd;
 
-class FourLeggedAnimal extends DelagatingSpecification
+class FourLeggedAnimal extends DelegatingSpecification
 {
     /**
      * @var string

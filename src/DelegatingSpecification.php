@@ -10,7 +10,7 @@ use Monii\Specification\Property\PropertyValueExtractor;
  * Class CompositeSpecification
  * @package Monii\Specification
  */
-abstract class DelagatingSpecification implements Specification
+abstract class DelegatingSpecification implements Specification
 {
     /**
      * @var Specification
