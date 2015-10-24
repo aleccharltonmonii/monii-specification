@@ -31,6 +31,15 @@ Until a stable version has been released or if a development version is preferre
 $> composer require monii/specification:@dev
 ```
 
+Rendering Implementations
+-------------------------
+
+By itself, the specification package is able to check individual existing objects to see if a specification is
+satisfied by the specification. In order to use a specification to query a set of objects not yet in memory
+you can render a specification into a query.
+
+ * [monii/specification-sql-adapter](https://github.com/monii/monii-specification-sql-adapter)
+
 
 License
 -------
