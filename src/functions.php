@@ -1,6 +1,7 @@
 <?php
 
 namespace Monii\Specification;
+
 use Monii\Specification\Operator\Page;
 use Monii\Specification\Operator\PerPage;
 use Monii\Specification\Pagination\Pagination;
