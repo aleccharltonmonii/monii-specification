@@ -24,7 +24,12 @@ class LogicalOr implements Specification
 
     public function getAllSpecifications()
     {
-        return array_merge([$this], $this->children);
+        $allSpecifications = [$this];
+        foreach ($this->children as $child) {
+            $allSpecifications = array_merge($allSpecifications, $child->getAllSpecifications());
+        }
+
+        return $allSpecifications;
     }
 
     public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)

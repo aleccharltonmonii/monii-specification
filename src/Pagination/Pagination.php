@@ -39,4 +39,24 @@ class Pagination
     {
         return $this->page;
     }
+
+    public static function createWithoutPagingInformation()
+    {
+        return new self();
+    }
+
+    public static function createWithPerPageOnly($perPage)
+    {
+        return new self($perPage);
+    }
+
+    public static function createWithPageOnly($page)
+    {
+        return new self(null, $page);
+    }
+
+    public static function createWithPerPageAndPage($perPage, $page)
+    {
+        return new self($perPage, $page);
+    }
 }
