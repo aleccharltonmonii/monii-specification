@@ -23,11 +23,6 @@ class Equals implements Specification
         $this->value = $value;
     }
 
-    public function render(callable $render)
-    {
-        $render($this->field, $this->value);
-    }
-
     public function getAllSpecifications()
     {
         return [$this];

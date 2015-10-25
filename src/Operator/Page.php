@@ -13,41 +13,63 @@ class Page implements Specification
     private $page;
 
     /**
-     * @var Specification
+     * @var Specification|null
      */
-    private $specification;
+    private $childSpecification;
 
     public function __construct($page, Specification $specification = null)
     {
         $this->page = $page;
-        $this->specification = $specification;
-    }
-
-    public function render(callable $render)
-    {
-        $render($this->page, $this->specification);
+        $this->childSpecification = $specification;
     }
 
     public function getAllSpecifications()
     {
         $allSpecifications = [$this];
-        if (! is_null($this->specification)) {
+        if (! is_null($this->childSpecification)) {
             $allSpecifications = array_merge(
                 $allSpecifications,
-                $this->specification->getAllSpecifications()
+                $this->childSpecification->getAllSpecifications()
             );
         }
 
         return $allSpecifications;
     }
 
+    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    {
+        return true;
+    }
+
+    /**
+     * @return int
+     */
     public function getPage()
     {
         return $this->page;
     }
 
-    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    /**
+     * @return Specification|null
+     */
+    public function getChildSpecification()
     {
-        return true;
+        return $this->childSpecification;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasChildSpecification()
+    {
+        return ! is_null($this->childSpecification);
+    }
+
+    /**
+     * @return bool
+     */
+    public function doesNotHaveChildSpecification()
+    {
+        return is_null($this->childSpecification);
     }
 }

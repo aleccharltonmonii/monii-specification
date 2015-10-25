@@ -13,19 +13,14 @@ class OrderedAscending implements Specification
     private $field;
 
     /**
-     * @var Specification
+     * @var Specification|null
      */
-    private $specification;
+    private $childSpecification;
 
-    public function __construct($field, Specification $specification)
+    public function __construct($field, Specification $specification = null)
     {
         $this->field = $field;
-        $this->specification = $specification;
-    }
-
-    public function render(callable $render)
-    {
-        $render($this->field, $this->specification);
+        $this->childSpecification = $specification;
     }
 
     public function getAllSpecifications()
@@ -36,5 +31,37 @@ class OrderedAscending implements Specification
     public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
     {
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
+     * @return Specification|null
+     */
+    public function getChildSpecification()
+    {
+        return $this->childSpecification;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasChildSpecification()
+    {
+        return ! is_null($this->childSpecification);
+    }
+
+    /**
+     * @return bool
+     */
+    public function doesNotHaveChildSpecification()
+    {
+        return is_null($this->childSpecification);
     }
 }

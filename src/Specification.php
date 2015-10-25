@@ -17,14 +17,6 @@ interface Specification
     public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor);
 
     /**
-     * Render the specification.
-     *
-     * @param callable $render
-     * @return void
-     */
-    public function render(callable $render);
-
-    /**
      * Get all specifications.
      *
      * @return Specification[]

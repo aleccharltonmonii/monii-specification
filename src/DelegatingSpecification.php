@@ -30,16 +30,6 @@ abstract class DelegatingSpecification implements Specification
     /**
      * {@inheritdoc}
      */
-    public function render(callable $render)
-    {
-        $this->assertDeleteWasConfigured();
-
-        $render($this->delegateSpecification);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAllSpecifications()
     {
         $this->assertDeleteWasConfigured();
@@ -67,5 +57,15 @@ abstract class DelegatingSpecification implements Specification
         }
 
         throw DelegatingSpecificationNotConfigured::forObject($this);
+    }
+
+    /**
+     * @return Specification
+     */
+    public function getDelegateSpecification()
+    {
+        $this->assertDeleteWasConfigured();
+
+        return $this->delegateSpecification;
     }
 }

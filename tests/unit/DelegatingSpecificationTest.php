@@ -6,14 +6,11 @@ use Monii\Specification\Operator\Equals;
 use Monii\Specification\Operator\LogicalAnd;
 use Monii\Specification\Tests\Fixtures\FourLeggedAnimal;
 use Monii\Specification\Tests\Fixtures\Pet;
-use Monii\Specification\Tests\Unit\Operator\IsSatisfiedTests;
-use Monii\Specification\Tests\Unit\Operator\RenderTests;
 use PHPUnit_Framework_TestCase;
 
 class DelegatingSpecificationTest extends PHPUnit_Framework_TestCase
 {
     use IsSatisfiedTests;
-    use RenderTests;
 
     public function provideIsSatisfiedBySuccessData()
     {

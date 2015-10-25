@@ -4,14 +4,12 @@ namespace Monii\Unit\Specification\Operator;
 
 use Monii\Specification\Operator\Equals;
 use Monii\Specification\Tests\Fixtures\ObjectWithGetters;
-use Monii\Specification\Tests\Unit\Operator\IsSatisfiedTests;
-use Monii\Specification\Tests\Unit\Operator\RenderTests;
+use Monii\Specification\Tests\Unit\IsSatisfiedTests;
 use PHPUnit_Framework_TestCase;
 
 class EqualsTest extends PHPUnit_Framework_TestCase
 {
     use IsSatisfiedTests;
-    use RenderTests;
 
     public function provideIsSatisfiedBySuccessData()
     {

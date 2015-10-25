@@ -13,41 +13,63 @@ class PerPage implements Specification
     private $perPage;
 
     /**
-     * @var Specification
+     * @var Specification|null
      */
-    private $specification;
+    private $childSpecification;
 
     public function __construct($perPage, Specification $specification = null)
     {
         $this->perPage = $perPage;
-        $this->specification = $specification;
-    }
-
-    public function render(callable $render)
-    {
-        $render($this->perPage, $this->specification);
+        $this->childSpecification = $specification;
     }
 
     public function getAllSpecifications()
     {
         $allSpecifications = [$this];
-        if (! is_null($this->specification)) {
+        if (! is_null($this->childSpecification)) {
             $allSpecifications = array_merge(
                 $allSpecifications,
-                $this->specification->getAllSpecifications()
+                $this->childSpecification->getAllSpecifications()
             );
         }
 
         return $allSpecifications;
     }
 
+    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    {
+        return true;
+    }
+
+    /**
+     * @return int
+     */
     public function getPerPage()
     {
         return $this->perPage;
     }
 
-    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    /**
+     * @return Specification|null
+     */
+    public function getChildSpecification()
     {
-        return true;
+        return $this->childSpecification;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasChildSpecification()
+    {
+        return ! is_null($this->childSpecification);
+    }
+
+    /**
+     * @return bool
+     */
+    public function doesNotHaveChildSpecification()
+    {
+        return is_null($this->childSpecification);
     }
 }

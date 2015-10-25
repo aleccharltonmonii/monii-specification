@@ -1,6 +1,6 @@
 <?php
 
-namespace Monii\Specification\Tests\Unit\Operator;
+namespace Monii\Specification\Tests\Unit;
 
 use Monii\Specification\Property\Extractor\PublicGetterExtractor;
 use Monii\Specification\Specification;

@@ -10,23 +10,18 @@ class LogicalOr implements Specification
     /**
      * @var Specification[]
      */
-    private $children;
+    private $childSpecifications;
 
     public function __construct()
     {
-        $this->children = func_get_args();
-    }
-
-    public function render(callable $render)
-    {
-        $render($this->children);
+        $this->childSpecifications = func_get_args();
     }
 
     public function getAllSpecifications()
     {
         $allSpecifications = [$this];
-        foreach ($this->children as $child) {
-            $allSpecifications = array_merge($allSpecifications, $child->getAllSpecifications());
+        foreach ($this->childSpecifications as $childSpecification) {
+            $allSpecifications = array_merge($allSpecifications, $childSpecification->getAllSpecifications());
         }
 
         return $allSpecifications;
@@ -34,12 +29,20 @@ class LogicalOr implements Specification
 
     public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
     {
-        foreach ($this->children as $child) {
-            if ($child->isSpecifiedBy($input, $propertyValueExtractor)) {
+        foreach ($this->childSpecifications as $childSpecification) {
+            if ($childSpecification->isSpecifiedBy($input, $propertyValueExtractor)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * @return Specification[]
+     */
+    public function getChildSpecifications()
+    {
+        return $this->childSpecifications;
     }
 }
