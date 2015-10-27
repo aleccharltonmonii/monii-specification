@@ -3,6 +3,7 @@
 namespace Monii\Specification;
 
 use Monii\Specification\Property\PropertyValueExtractor;
+use Monii\Specification\Property\PropertyValueManipulator;
 
 /**
  * A convenience base class for building custom specifications.
@@ -43,11 +44,11 @@ abstract class DelegatingSpecification implements Specification
     /**
      * {@inheritdoc}
      */
-    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    public function isSpecifiedBy($input, PropertyValueManipulator $propertyValueManipulator)
     {
         $this->assertDeleteWasConfigured();
 
-        return $this->delegateSpecification->isSpecifiedBy($input, $propertyValueExtractor);
+        return $this->delegateSpecification->isSpecifiedBy($input, $propertyValueManipulator);
     }
 
     private function assertDeleteWasConfigured()

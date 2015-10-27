@@ -16,15 +16,15 @@ class CallableExtractor implements PropertyValueExtractor
         $this->callable = $callable;
     }
 
+    public function supportsExtractionOfPropertyValue($targetObject, $propertyName)
+    {
+        return true;
+    }
+
     public function extractPropertyValueFrom($targetObject, $propertyName)
     {
         $callable = $this->callable;
 
         return $callable($targetObject, $propertyName);
-    }
-
-    public function supportsExtractionOfProperty($targetObject, $propertyName)
-    {
-        return true;
     }
 }

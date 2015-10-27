@@ -3,18 +3,27 @@
 namespace Monii\Specification\Tests\Unit;
 
 use Monii\Specification\Property\Extractor\PublicGetterExtractor;
+use Monii\Specification\Property\Normalizer\PassthroughNormalizer;
+use Monii\Specification\Property\PropertyValueManipulator;
 use Monii\Specification\Specification;
 use PHPUnit_Framework_Assert as Assert;
 
 trait IsSatisfiedTests
 {
+    private function getPropertyValueManipulator()
+    {
+        return new PropertyValueManipulator(
+            new PublicGetterExtractor(),
+            new PassthroughNormalizer()
+        );
+    }
     /**
      * @param object $object
      * @dataProvider provideIsSatisfiedBySuccessData
      */
     public function testIsSatisfiedBySuccess(Specification $specification, $object)
     {
-        Assert::assertTrue($specification->isSpecifiedBy($object, new PublicGetterExtractor()));
+        Assert::assertTrue($specification->isSpecifiedBy($object, $this->getPropertyValueManipulator()));
     }
 
     /**
@@ -39,7 +48,7 @@ trait IsSatisfiedTests
      */
     public function testIsSatisfiedByFailure(Specification $specification, $object)
     {
-        Assert::assertFalse($specification->isSpecifiedBy($object, new PublicGetterExtractor()));
+        Assert::assertFalse($specification->isSpecifiedBy($object, $this->getPropertyValueManipulator()));
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Monii\Specification\Operator;
 
-use Monii\Specification\Property\PropertyValueExtractor;
+use Monii\Specification\Property\PropertyValueManipulator;
 use Monii\Specification\Specification;
 
 class Equals implements Specification
@@ -28,11 +28,13 @@ class Equals implements Specification
         return [$this];
     }
 
-    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    public function isSpecifiedBy($input, PropertyValueManipulator $propertyValueManipulator)
     {
-        $actualValue = $propertyValueExtractor->extractPropertyValueFrom($input, $this->field);
+        $actualValue = $propertyValueManipulator->extractPropertyValue($input, $this->field);
+        $actualValue = $propertyValueManipulator->normalizePropertyValue($input, $this->field, $actualValue);
+        $expectedValue = $propertyValueManipulator->normalizeValue($input, $this->field, $this->value);
 
-        return $actualValue === $this->value;
+        return $actualValue == $expectedValue;
     }
 
     /**

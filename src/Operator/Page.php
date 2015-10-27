@@ -2,7 +2,7 @@
 
 namespace Monii\Specification\Operator;
 
-use Monii\Specification\Property\PropertyValueExtractor;
+use Monii\Specification\Property\PropertyValueManipulator;
 use Monii\Specification\Specification;
 
 class Page implements Specification
@@ -36,7 +36,7 @@ class Page implements Specification
         return $allSpecifications;
     }
 
-    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    public function isSpecifiedBy($input, PropertyValueManipulator $propertyValueManipulator)
     {
         return true;
     }

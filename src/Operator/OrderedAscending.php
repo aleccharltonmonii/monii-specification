@@ -2,7 +2,7 @@
 
 namespace Monii\Specification\Operator;
 
-use Monii\Specification\Property\PropertyValueExtractor;
+use Monii\Specification\Property\PropertyValueManipulator;
 use Monii\Specification\Specification;
 
 class OrderedAscending implements Specification
@@ -28,7 +28,7 @@ class OrderedAscending implements Specification
         return [$this];
     }
 
-    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor)
+    public function isSpecifiedBy($input, PropertyValueManipulator $propertyValueManipulator)
     {
         return true;
     }

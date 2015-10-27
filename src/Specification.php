@@ -2,7 +2,7 @@
 
 namespace Monii\Specification;
 
-use Monii\Specification\Property\PropertyValueExtractor;
+use Monii\Specification\Property\PropertyValueManipulator;
 
 interface Specification
 {
@@ -10,11 +10,11 @@ interface Specification
      * Is the given object specified by this specification?
      *
      * @param object $input
-     * @param PropertyValueExtractor $propertyValueExtractor
+     * @param PropertyValueManipulator $propertyValueManipulator
      *
      * @return bool
      */
-    public function isSpecifiedBy($input, PropertyValueExtractor $propertyValueExtractor);
+    public function isSpecifiedBy($input, PropertyValueManipulator $propertyValueManipulator);
 
     /**
      * Get all specifications.

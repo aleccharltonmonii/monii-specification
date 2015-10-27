@@ -17,6 +17,17 @@ class PropertyValueExtractorChain implements PropertyValueExtractor
         $this->propertyValueExtractors = $propertyValueExtractors;
     }
 
+    public function supportsExtractionOfPropertyValue($targetObject, $propertyName)
+    {
+        foreach ($this->propertyValueExtractors as $propertyValueExtractor) {
+            if ($propertyValueExtractor->supportsExtractionOfPropertyValue($targetObject, $propertyName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function extractPropertyValueFrom($targetObject, $propertyName)
     {
         $subExceptions = [];
@@ -32,16 +43,5 @@ class PropertyValueExtractorChain implements PropertyValueExtractor
         }
 
         throw new PropertyValueExtractionNotPossible($this, $targetObject, $propertyName, $subExceptions);
-    }
-
-    public function supportsExtractionOfProperty($targetObject, $propertyName)
-    {
-        foreach ($this->propertyValueExtractors as $propertyValueExtractor) {
-            if ($propertyValueExtractor->supportsExtractionOfProperty($targetObject, $propertyName)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
