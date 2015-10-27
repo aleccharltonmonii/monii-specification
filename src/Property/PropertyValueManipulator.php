@@ -20,8 +20,10 @@ class PropertyValueManipulator
      * @param PropertyValueExtractor $propertyValueExtractor
      * @param PropertyValueNormalizer $propertyValueNormalizer
      */
-    public function __construct(PropertyValueExtractor $propertyValueExtractor, PropertyValueNormalizer $propertyValueNormalizer)
-    {
+    public function __construct(
+        PropertyValueExtractor $propertyValueExtractor,
+        PropertyValueNormalizer $propertyValueNormalizer
+    ) {
         $this->propertyValueExtractor = $propertyValueExtractor;
         $this->propertyValueNormalizer = $propertyValueNormalizer;
     }
