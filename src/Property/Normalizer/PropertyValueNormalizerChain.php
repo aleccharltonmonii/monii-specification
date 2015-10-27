@@ -44,4 +44,21 @@ class PropertyValueNormalizerChain implements PropertyValueNormalizer
 
         throw new PropertyValueNormalizationNotPossible($this, $targetObject, $propertyName, $subExceptions);
     }
+
+    public function normalizeValueFor($targetObject, $propertyName, $value = null)
+    {
+        $subExceptions = [];
+
+        foreach ($this->propertyValueNormalizers as $propertyValueNormalizer) {
+            try {
+                return $propertyValueNormalizer->normalizeValueFor($targetObject, $propertyName);
+            } catch (PropertyValueNormalizationNotPossible $e) {
+                $subExceptions[] = $e;
+
+                continue;
+            }
+        }
+
+        throw new PropertyValueNormalizationNotPossible($this, $targetObject, $propertyName, $subExceptions);
+    }
 }
