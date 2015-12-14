@@ -25,7 +25,15 @@ class OrderedDescending implements Specification
 
     public function getAllSpecifications()
     {
-        return [$this];
+        $allSpecifications = [$this];
+        if (! is_null($this->childSpecification)) {
+            $allSpecifications = array_merge(
+                $allSpecifications,
+                $this->childSpecification->getAllSpecifications()
+            );
+        }
+
+        return $allSpecifications;
     }
 
     public function isSpecifiedBy($input, PropertyValueManipulator $propertyValueManipulator)
