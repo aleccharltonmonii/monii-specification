@@ -32,4 +32,12 @@ class Not implements Specification
             $this->childSpecification->getAllSpecifications()
         );
     }
+
+    /**
+     * @return Specification
+     */
+    public function getChildSpecification()
+    {
+        return $this->childSpecification;
+    }
 }
