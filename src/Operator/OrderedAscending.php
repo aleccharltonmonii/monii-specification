@@ -38,7 +38,10 @@ class OrderedAscending implements Specification
 
     public function isSpecifiedBy($input, PropertyValueManipulator $propertyValueManipulator)
     {
-        return true;
+        if ($this->doesNotHaveChildSpecification()) {
+            return true;
+        }
+        return $this->getChildSpecification()->isSpecifiedBy($input, $propertyValueManipulator);
     }
 
     /**
